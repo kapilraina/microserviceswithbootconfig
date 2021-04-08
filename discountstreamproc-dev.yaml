@@ -1,0 +1,8 @@
+discountstreamproc.binding.in.discpipe01.destination: TX-DISCOUNTSTREAM
+discountstreamproc.binding.in.discpipe01.group: simpleDiscountPipeline
+discountstreamproc.binding.in.winaggdisc01.destination: TX-DISCOUNTSTREAM
+discountstreamproc.binding.out.winaggdisc01.destination: TX-AGG-DISCOUNTSTREAM
+discountstreamproc.binding.in.windiscbyinstance01.destination: TX-DISCOUNTSTREAM
+discountstreamproc.config.bus.exchange: busConfigExchange
+discountstreamproc.zipkin.url: http://zipkin:9411/
+discountstreamproc.eureka.url: http://eureka:8761/eureka

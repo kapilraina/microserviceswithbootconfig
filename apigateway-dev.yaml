@@ -1,0 +1,41 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: 
+            - GET
+            - POST
+            - PATCH
+            - OPTIONS
+            - DELETE
+      routes:
+      - id: productms
+        uri: lb://productms
+        predicates:
+        - Path=/product/v5/**
+      - id: discountstreamproc
+        uri: lb://discountstreamproc
+        predicates:
+        - Path=/discountdashboard/*.html
+        filters:
+        - RewritePath=/discountdashboard/?(?<segment>.*), /$\{segment}
+      - id: webjars
+        uri: lb://discountstreamproc
+        predicates:
+        - Path=/webjars/**, /**.css, /**.js,/websock/**   
+        - Method=GET        
+      - id: websockpost
+        uri: lb://discountstreamproc
+
+        predicates:
+        - Method=POST,OPTIONS
+        - Path=/websock/**
+       
+apigateway.zipkin.url: http://zipkin:9411/
+apigateway.rabbitmq.host: localhost
+apigateway.rabbitmq.port: "5672"
+apigateway.eureka.url: http://eureka:8761/eureka
